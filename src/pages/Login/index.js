@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-import { Card, Button, Checkbox, Form, Input } from 'antd'
+import { Card, Button, Checkbox, Form, Input, message } from 'antd'
 import './index.scss'
 import logo from 'assets/logo.png' //因为在jsconfig.json里已经配置过绝对引入了，所以这里可以写绝对路径，详见2-1-19以及https://create-react-app.dev/docs/importing-a-component
+import { login } from 'api/user'
 export default class Login extends Component {
+  state = {
+    //加载状态
+    loading: false,
+  }
   render() {
     return (
       <div className='login'>
@@ -63,7 +68,7 @@ export default class Login extends Component {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" block>
+              <Button type="primary" htmlType="submit" block loading={this.state.loading}>
                 登录
               </Button>
             </Form.Item>
@@ -73,7 +78,24 @@ export default class Login extends Component {
     )
   }
 
-  onFinish = (values) => {
-    console.log(values)
+  onFinish = async ({ mobile, code }) => {
+    this.setState({
+      loading: true //让登录按钮进入加载状态
+    })
+    try {
+      const res = await login(mobile, code)
+      //登录成功之后保存token、跳转页面
+      message.success('登录成功', 1, () => {
+        localStorage.setItem('token', res.data.token)
+        this.props.history.push('/home')
+      })
+    } catch (error) {
+      message.warning(error.response.data.message, 1, () => {
+        this.setState({
+          loading: false //让登录按钮退出加载状态
+        })
+      })
+
+    }
   }
 }
