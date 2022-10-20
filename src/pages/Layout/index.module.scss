@@ -1,0 +1,50 @@
+.layout {
+  height: 100vh;
+
+  :global {
+    .ant-layout {
+      height: 100%;
+    }
+
+    .ant-layout-header {
+      padding : 0;
+      position: relative;
+    }
+
+    .logo {
+      float            : left;
+      width            : 200px;
+      height           : 64px;
+      //margin         : 2px 0;
+      background       : url(~assets/glogo.svg); //因为在jsconfig.json里已经配置过绝对引入了，所以这里可以写绝对路径，又因为这是在scss里，所以绝对路径前要加“~”符号，详见2-1-19以及https://create-react-app.dev/docs/importing-a-component
+      background-color : rgb(211, 211, 211);
+      background-size  : 200px 64px;
+    }
+
+    .profile {
+      color      : rgb(58, 58, 58);
+      font-weight: 700;
+      position   : absolute;
+      right      : 20px;
+
+      span+span {
+        //意思是第一个span后面的那个span，即:第二个span
+        margin-left: 20px;
+        cursor     : pointer;
+      }
+    }
+
+    .ant-row-rtl .logo {
+      float : right;
+      margin: 16px 0 16px 24px;
+    }
+
+    .site-layout-background {
+      background: #fff;
+    }
+
+    .header {
+      background: rgb(216, 216, 216);
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Button, Checkbox, Form, Input, message } from 'antd'
-import './index.scss'
-import logo from 'assets/logo.png' //因为在jsconfig.json里已经配置过绝对引入了，所以这里可以写绝对路径，详见2-1-19以及https://create-react-app.dev/docs/importing-a-component
+import styles from './index.module.scss' //css modules相关知识点
+import logo from 'assets/glogo.svg' //因为在jsconfig.json里已经配置过绝对引入了，所以这里可以写绝对路径，详见2-1-19以及https://create-react-app.dev/docs/importing-a-component
 import { login } from 'api/user'
+import { setToken } from 'utils/storage'
 export default class Login extends Component {
   state = {
     //加载状态
@@ -10,10 +11,11 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <div className='login'>
+      <div className={styles.login}>
         <Card className="login-container">
           <img src={logo} alt="" className='login-logo' /> {/*react里的图片src必须像这样显示导入*/}
-          <Form size="large"
+          <Form
+            size="large"
             validateTrigger={['onChange', 'onBlur']}
             onFinish={this.onFinish}
             initialValues={{
@@ -86,8 +88,15 @@ export default class Login extends Component {
       const res = await login(mobile, code)
       //登录成功之后保存token、跳转页面
       message.success('登录成功', 1, () => {
-        localStorage.setItem('token', res.data.token)
-        this.props.history.push('/home')
+        //localStorage.setItem('token', res.data.token)
+        setToken(res.data.token)
+        //this.props.history.push('/home') //跳转到首页
+        const { state } = this.props.location //关于state的起源请见AuthRoute文件夹下的index.js
+        if (state) { //如果state存在
+          this.props.history.push(state.from) //就跳转到state.from里的地址(即:跳转到登录前的页面)
+        } else {
+          this.props.history.push('/home') //否则就跳转到首页
+        }
       })
     } catch (error) {
       message.warning(error.response.data.message, 1, () => {

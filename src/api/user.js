@@ -17,3 +17,14 @@ export const login = (mobile, code) => {
     },
   })
 }
+
+/**
+ * 获取用户信息。详见文档http://geek.itheima.net/api-pc.html#u83b7u53d6u7528u6237u4e2au4ebau8d44u65990a3ca20id3du83b7u53d6u7528u6237u4e2au4ebau8d44u65993e203ca3e
+ * @returns
+ */
+export const getUserProfile = () => {
+  return request({
+    method: 'get',
+    url: '/user/profile',
+  })
+}
