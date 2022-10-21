@@ -4,6 +4,7 @@
   :global {
     .ant-layout {
       height: 100%;
+      overflow: auto; //这行是老子自己加的
     }
 
     .ant-layout-header {

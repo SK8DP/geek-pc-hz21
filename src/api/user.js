@@ -1,5 +1,5 @@
-import request from 'utils/request'
 //当前组件用于将用户相关的网络请求封装成接口以实现逻辑复用
+import request from 'utils/request'
 
 /**
  * 登录请求，用于用户登录

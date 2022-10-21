@@ -1,3 +1,4 @@
+//当前组件主要用于配置并封装axios请求的实例对象
 import { message } from 'antd';
 import axios from 'axios'
 import { hasToken, getToken, removeToken } from './storage';
@@ -30,6 +31,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
+  response.data.data.name = "TripleSpeed" //这行是老子自己加的，这样用户名就永远显示的是TripleSpeed了
   return response.data //这里改动了一下，我们这里让它只把axios响应回来的对象的data字段的值返回，这样返回值就更简洁，省去返回了一堆axios默认添加的没用的字段
 },
   function (error) {

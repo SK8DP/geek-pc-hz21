@@ -1,4 +1,4 @@
-// 此组件用于封装所有的localStorage的操作
+// 此组件用于封装所有的localStorage相关的操作
 const TOKEN_KEY = 'token-geek-pc-hz21' //由于在当前这个组件中已经把所有的token相关操作都封装到一起了，所以这里的TOKEN_KEY在需要变更时就只在这里变更一次即可，而且key想弄多复杂都可以，随心所欲，想改就改
 
 /**
