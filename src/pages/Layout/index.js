@@ -80,7 +80,7 @@ export default class LayoutComponent extends Component {
                 <Menu.Item key="/home/publish" icon={<EditOutlined />}><Link to="/home/publish">发布文章</Link></Menu.Item>
               </Menu>
             </Sider>
-            <Layout style={{ padding: '24px' }}>
+            <Layout style={{ padding: '24px', overflow: 'auto' }}>
               <Content className="site-layout-background">
                 <Switch>
                   <Route exact path="/home" component={Home}></Route> {/*路径和当前整个大组件的路径一样，都是/home，这样就实现了一进来就默认停到Home组件*/} {/*加了exact就是精确匹配，这样当后续匹配到/home/......的路径时，也不会被当前的这个/home截胡*/}
