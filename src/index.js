@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css'; //这里的min必不可少，否则打包的时候报错。详见https://blog.51cto.com/xiaowangkkk/5375676
 import './index.css';
 import App from './App';
 import { ConfigProvider } from 'antd'
